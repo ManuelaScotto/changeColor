@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    margin: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* card */
+.card {
+    width: calc(100% / 3 - 20px) ;
+    height: 400px;
+    margin: 20px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 14px 18px -8px rgba(171,171,171,1);
+    -moz-box-shadow: 0px 14px 18px -8px rgba(171,171,171,1);
+    box-shadow: 0px 14px 18px -8px rgba(171,171,171,1);
+}
+
+/* contrast */
+.contrast {
+    position: relative;
+    height: 160px;
+    padding: 10px;
+    border-top: 1px solid black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: 1px solid black;
+}
+
+.contrast svg.fa-ellipsis-v, .i {
+    float: right;
+    margin: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.contrast h4 {
+    padding-top: 30px;
+}
+
+/* button */
+.color {
+    display: inline-block;
+    margin: 15px 5px;
+    padding: 15px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+/* dropdown */
+.dropdown {
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    -webkit-box-shadow: 0px 12px 10px 0px rgba(171,171,171,1);
+    -moz-box-shadow: 0px 12px 10px 0px rgba(171,171,171,1);
+    box-shadow: 0px 12px 10px 0px rgba(171,171,171,1);
+    padding: 5px 0;
+    border-radius: 5px;
+    background-color: white;
+    z-index: 2;
+    transition: all .8s;
+}
+
+.dropdown ul {
+    list-style: none;
+}
+
+.dropdown ul li {
+    padding: 10px 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.dropdown ul li:hover {
+    background-color: aliceblue;
+}
+
+.dropdown .border {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+/* font */
+.font {
+    margin: 20px 10px;
+}
+
+.font h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
