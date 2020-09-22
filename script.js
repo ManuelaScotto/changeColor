@@ -1,11 +1,13 @@
 // //////////////////////////////////////////////////////////////////////////
 // COMPONENTE BUTTON 
-// ottengo un colore diverso per ogni bottone
+// ottengo un colore diverso per ogni bottone al passaggio del mouse sul bottone
 // //////////////////////////////////////////////////////////////////////////
 
 function Buttons(props) {
     return (
-        <button className="color" style={{ backgroundColor: props.c }} onClick={() => props.colorChange(props.c)}>
+        <button className="color" style={{ backgroundColor: props.c }} onMouseEnter={() => props.colorChange(props.c, props.id)}
+            onMouseLeave={() => props.mouseOff()}
+        >
             <p>{props.c}</p>
         </button>
     )
@@ -32,7 +34,7 @@ function CardFont(props) {
 
 const DropDown = (props) => {
     return (
-        <div className="dropdown" style={{ opacity: props.isOpen ? 1 : 0 }} >
+        <div className="dropdown" style={{ opacity: props.isOpen ? 1 : 0 }}>
             <ul>
                 <li>Esporta</li>
                 <li className="border" >Font Preferito</li>
@@ -51,19 +53,24 @@ class Card extends React.Component {
         super(props)
         this.state = {
             dropIsOpen: false, //per il dropdown (inizialmente è false)
+            transition: false,
             bckColor: 'white',
             id: [1, 2, 3], //id delle card
             colors: props.colors, //recupero l'array colors da Card in App per poterlo mappare
             font: props.font,
-            fontName: props.fontName
+            fontName: props.fontName,
+            colorInput: ''
         }
         this.handleColor = this.handleColor.bind(this)
+        this.mouseOff = this.mouseOff.bind(this)
     }
     handleColor(color) { //recupero il colore in base al click del mouse
         this.setState({
             bckColor: color,
+            transition: true
         })
     }
+
     handleClick() {  // visualizza e nasconde dropdown al click
         if (!this.state.dropIsOpen) {
             this.setState({
@@ -75,10 +82,28 @@ class Card extends React.Component {
             })
         }
     }
+    handleSubmit = (e) => { //onSubmit dell'input
+        e.preventDefault();
+        this.setState({
+            bckColor: this.state.colorInput,
+            transition: true,
+            colorInput: ''
+        })
+    }
+    handleChange = (e) => { //modifica il background color in base al colore che inserisco nell'input (value)
+        this.setState({
+            colorInput: e.target.value
+        })
+    }
+    mouseOff() { //quando tolgo il mouse il background color mi ritorna null
+        this.setState({
+            bckColor: null
+        })
+    }
     render() {
         return (
             /* modifico il background color delle card in base al click del mouse (recupero color da handlecolor) */
-            <div className="card" style={{ backgroundColor: this.state.bckColor }}>
+            <div className="card" style={{ backgroundColor: this.state.bckColor, transition: this.state.transition && '1.1s' }}>
                 <div className="contrast">
                     {/* inserisco la i all'interno di un div per poter utilizzare onClick */}
                     <div className="i" style={{ width: 20, height: 30 }} onClick={() => this.handleClick()} ><i className="fas fa-ellipsis-v"></i></div>
@@ -91,9 +116,11 @@ class Card extends React.Component {
                             <Buttons
                                 // recupero i colori dei bottoni 
                                 key={this.state.id[key]}
+                                id={this.state.id[key]}
                                 color={this.state.colors}
                                 c={cl}
                                 colorChange={this.handleColor}
+                                mouseOff={this.mouseOff}
                             />
                         )
                     })
@@ -113,6 +140,9 @@ class Card extends React.Component {
                     })
                     }
                 </div>
+                <form onSubmit={this.handleSubmit} noValidate>
+                    <input type="text" value={this.state.colorInput} placeholder="Inserisci un colore" onChange={this.handleChange} onMouseOut={() => this.setState({ transition: false })} autoComplete="off" />
+                </form>
             </div>
         )
     }
@@ -129,6 +159,7 @@ function App() {
             <Card colors={['#ff9a00', '#ff5700', '#ff0340']} font={["Verdana, Geneva, Tahoma, sans-serif"]} fontName={['Verdana']} />
             <Card colors={['#B0E0E6', '#00ADB5', '#45969B']} font={["Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"]} fontName={['Impact']} />
             <Card colors={['#DDA0DD', '#800080', '#2F35C5']} font={["Arial, Helvetica, sans-serif"]} fontName={['Arial']} />
+            <Card colors={['#B3FDFD', '#00FFFF', ' #7FFFD4']} font={['Lucida Grande']} fontName={['Lucida']} />
         </div>
     )
 }
