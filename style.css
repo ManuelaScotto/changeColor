@@ -14,7 +14,7 @@
 
 /* card */
 .card {
-    width: 425px ;
+    width: 520px ;
     /* width: calc(100% / 3 - 40px) ; */
     height: 400px;
     margin: 40px;
@@ -119,4 +119,14 @@ input {
 input:active, input:focus {
     border: 1px solid black;
     outline: 0;
+}
+
+@media screen and (max-width: 537px) {
+    .color {
+        padding: 5px;
+        margin: 10px;
+    }
+    input {
+        margin: 0;
+    }
 }

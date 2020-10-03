@@ -53,9 +53,9 @@ class Card extends React.Component {
         super(props)
         this.state = {
             dropIsOpen: false, //per il dropdown (inizialmente è false)
-            transition: false,
+            // transition: false,
             bckColor: 'white',
-            id: [1, 2, 3], //id delle card
+            id: [1, 2, 3, 4], //id delle card
             colors: props.colors, //recupero l'array colors da Card in App per poterlo mappare
             font: props.font,
             fontName: props.fontName,
@@ -70,7 +70,11 @@ class Card extends React.Component {
             transition: true
         })
     }
-
+    mouseOff() { //quando tolgo il mouse il background color mi ritorna null
+        this.setState({
+            bckColor: null
+        })
+    }
     handleClick() {  // visualizza e nasconde dropdown al click
         if (!this.state.dropIsOpen) {
             this.setState({
@@ -95,11 +99,7 @@ class Card extends React.Component {
             colorInput: e.target.value
         })
     }
-    mouseOff() { //quando tolgo il mouse il background color mi ritorna null
-        this.setState({
-            bckColor: null
-        })
-    }
+
     render() {
         return (
             /* modifico il background color delle card in base al click del mouse (recupero color da handlecolor) */
@@ -150,7 +150,7 @@ class Card extends React.Component {
 
 // //////////////////////////////////////////////////////////////////////////
 // COMPONENTE APP
-// creo le 3 card con le sue caratteristiche
+// creo le card con le sue caratteristiche
 // //////////////////////////////////////////////////////////////////////////
 
 function App() {
